@@ -4,7 +4,7 @@ tagline: "A pocket-sized tower defense in the spirit of Onslaught 2."
 summary: "Top-down tower defense with five tower types, ten themed levels, and 1,000 waves. Procedurally drawn, asset-free, and runs in any modern browser."
 platforms: ["web", "android"]
 status: "live"
-year: 2025
+year: 2026
 featured: true
 order: 5
 heroImage: "/play/defendor/icon.svg"
