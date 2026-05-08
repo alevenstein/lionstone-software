@@ -12,6 +12,12 @@ const pageDescription = 'Play Defendor, a top-down tower defense game by Lionsto
 <html lang="en">
 	<head>
 		<BaseHead title={pageTitle} description={pageDescription} image="/play/defendor/icon.svg" />
+		<script
+			is:inline
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7133034697479472"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
 		<Header />
@@ -26,9 +32,16 @@ const pageDescription = 'Play Defendor, a top-down tower defense game by Lionsto
 				</div>
 			</header>
 
-			<!-- AD_SLOT_TOP -->
 			<aside class="ad-slot ad-top" aria-label="Advertisement">
-				<div class="ad-placeholder">Ad slot · 728 &times; 90</div>
+				<ins
+					class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-7133034697479472"
+					data-ad-slot="5762885187"
+					data-ad-format="auto"
+					data-full-width-responsive="true"
+				></ins>
+				<script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 			</aside>
 
 			<div class="play-layout">
@@ -41,9 +54,16 @@ const pageDescription = 'Play Defendor, a top-down tower defense game by Lionsto
 						loading="lazy"
 					></iframe>
 				</div>
-				<!-- AD_SLOT_SIDEBAR -->
 				<aside class="ad-slot ad-side" aria-label="Advertisement">
-					<div class="ad-placeholder">Ad slot · 300 &times; 600</div>
+					<ins
+						class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-7133034697479472"
+						data-ad-slot="7932313563"
+						data-ad-format="auto"
+						data-full-width-responsive="true"
+					></ins>
+					<script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 				</aside>
 			</div>
 
@@ -107,15 +127,23 @@ const pageDescription = 'Play Defendor, a top-down tower defense game by Lionsto
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
+			/* Visible only when an unfilled slot still has a placeholder div
+			   inside (e.g. before its AdSense slot ID is wired). The live
+			   AdSense <ins> renders without this border. */
+			.ad-placeholder {
+				flex: 1;
+				align-self: stretch;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.78rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
 				border: 1px dashed var(--border-strong);
 				border-radius: var(--radius-sm);
 				background: var(--bg-elevated);
 				color: var(--text-dim);
-			}
-			.ad-placeholder {
-				font-size: 0.78rem;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
 			}
 			.ad-top {
 				width: 100%;
