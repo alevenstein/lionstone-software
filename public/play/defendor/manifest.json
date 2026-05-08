@@ -1,0 +1,18 @@
+{
+  "name": "Defendor — Tower Defense",
+  "short_name": "Defendor",
+  "description": "A top-down tower defense game. Place turrets along a winding desert road and stop wave after wave of bugs from reaching your base.",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#0a0805",
+  "theme_color": "#1a1208",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

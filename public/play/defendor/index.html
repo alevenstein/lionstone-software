@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+<meta name="theme-color" content="#1a1208" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Defendor — Tower Defense</title>
+<link rel="manifest" href="manifest.json" />
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%; width: 100%;
+    background: #0a0805; color: #e8d8a8;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden; user-select: none; -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent; touch-action: none;
+    overscroll-behavior: none;
+  }
+  #stage {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at center, #2a1a0a 0%, #0a0805 80%);
+  }
+  #cv {
+    background: #b89868;
+    image-rendering: auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.7);
+    touch-action: none;
+  }
+  #orientwarn {
+    position: fixed; inset: 0; display: none;
+    align-items: center; justify-content: center; text-align: center;
+    background: #0a0805; z-index: 100; padding: 20px;
+  }
+  @media (orientation: portrait) and (max-width: 600px) {
+    #orientwarn { display: flex; }
+  }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="cv"></canvas></div>
+<div id="orientwarn">
+  <div>
+    <div style="font-size:48px;">📱↻</div>
+    <div style="font-size:18px;margin-top:10px;">Please rotate your device<br/>to landscape to play.</div>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
