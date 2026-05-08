@@ -1,0 +1,55 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ShowcaseCard from '../../components/ShowcaseCard.astro';
+import { SITE_TITLE } from '../../consts';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('showcase')).sort((a, b) => {
+	if (a.data.order !== b.data.order) return a.data.order - b.data.order;
+	return b.data.year - a.data.year;
+});
+
+const pageTitle = `Showcase — ${SITE_TITLE}`;
+const pageDescription = 'Games and software shipped (and being shipped) by Lionstone Software.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<span class="eyebrow">Showcase</span>
+				<h1>Everything we've shipped.</h1>
+				<p class="lede">
+					A running catalog of our games and apps — what's live, what's in beta, and what
+					we're still cooking. Click any project for the full story.
+				</p>
+			</section>
+
+			<section>
+				<div class="grid">
+					{entries.map((entry) => <ShowcaseCard entry={entry} />)}
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			.intro {
+				padding: 3rem 0 2rem;
+				max-width: 820px;
+			}
+			.intro h1 { margin: 0 0 1rem; }
+			.lede {
+				font-size: 1.15rem;
+				color: var(--text-muted);
+				margin: 0 0 1rem;
+			}
+		</style>
+	</body>
+</html>

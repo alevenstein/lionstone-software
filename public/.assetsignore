@@ -2,3 +2,12 @@ _worker.js
 _routes.json
 _headers
 _redirects
+
+# Defendor — private directories and repo metadata from the upstream Defendor
+# submodule (kept in source control there, but never served from Lionstone)
+play/defendor/memory/
+play/defendor/screenshots/
+play/defendor/specs/
+play/defendor/.git
+play/defendor/README.md
+play/defendor/Cloudflare.md

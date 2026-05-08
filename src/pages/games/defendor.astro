@@ -1,0 +1,180 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+const pageTitle = `Defendor — ${SITE_TITLE}`;
+const pageDescription = 'Play Defendor, a top-down tower defense game by Lionstone Software.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} image="/play/defendor/icon.svg" />
+	</head>
+	<body>
+		<Header />
+		<main class="play-page">
+			<header class="play-head">
+				<a class="back" href="/showcase/defendor/">&larr; About this game</a>
+				<div class="title-row">
+					<h1>Defendor</h1>
+					<a class="fullscreen-link" href="/play/defendor/index.html" target="_blank" rel="noopener">
+						Open fullscreen &#x2197;
+					</a>
+				</div>
+			</header>
+
+			<!-- AD_SLOT_TOP -->
+			<aside class="ad-slot ad-top" aria-label="Advertisement">
+				<div class="ad-placeholder">Ad slot · 728 &times; 90</div>
+			</aside>
+
+			<div class="play-layout">
+				<div class="game-frame">
+					<iframe
+						id="defendor-frame"
+						src="/play/defendor/index.html"
+						title="Defendor — tower defense game"
+						allow="fullscreen; autoplay; gamepad"
+						loading="lazy"
+					></iframe>
+				</div>
+				<!-- AD_SLOT_SIDEBAR -->
+				<aside class="ad-slot ad-side" aria-label="Advertisement">
+					<div class="ad-placeholder">Ad slot · 300 &times; 600</div>
+				</aside>
+			</div>
+
+			<p class="hint muted">
+				Trouble playing? <a href="/play/defendor/index.html" target="_blank" rel="noopener">Open the game in a new tab</a>.
+				On mobile, rotate to landscape.
+			</p>
+		</main>
+
+		<script is:inline>
+			(() => {
+				const frame = document.getElementById('defendor-frame');
+				if (!frame) return;
+				const focusFrame = () => {
+					try {
+						frame.contentWindow && frame.contentWindow.focus();
+					} catch {}
+				};
+				frame.addEventListener('load', focusFrame);
+				// Re-focus when the user clicks anywhere over the game frame, in
+				// case focus moved elsewhere (e.g. the user clicked the address
+				// bar or an ad). Same-origin iframe, so this is allowed.
+				const wrap = frame.parentElement;
+				wrap && wrap.addEventListener('pointerdown', focusFrame);
+			})();
+		</script>
+		<Footer />
+		<style>
+			.play-page {
+				/* Wider than other pages so the game can fill big monitors. */
+				max-width: 1920px;
+				padding: 1.25rem 1.25rem 1.5rem;
+			}
+			.play-head {
+				margin-bottom: 0.75rem;
+			}
+			.back {
+				display: inline-block;
+				color: var(--text-muted);
+				font-size: 0.9rem;
+				margin-bottom: 0.5rem;
+			}
+			.back:hover { color: var(--accent); }
+			.title-row {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+			.title-row h1 {
+				margin: 0;
+				font-size: clamp(1.8rem, 4vw, 2.4rem);
+			}
+			.fullscreen-link {
+				font-size: 0.95rem;
+				font-weight: 700;
+			}
+
+			.ad-slot {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px dashed var(--border-strong);
+				border-radius: var(--radius-sm);
+				background: var(--bg-elevated);
+				color: var(--text-dim);
+			}
+			.ad-placeholder {
+				font-size: 0.78rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+			}
+			.ad-top {
+				width: 100%;
+				min-height: 90px;
+				margin-bottom: 0.75rem;
+			}
+			.ad-side {
+				width: 300px;
+				min-height: 600px;
+				flex-shrink: 0;
+			}
+
+			.play-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr);
+				gap: 1.25rem;
+				align-items: start;
+			}
+			.game-frame {
+				position: relative;
+				width: 100%;
+				aspect-ratio: 16 / 9;
+				/* Cap height to fit the viewport. The constant accounts for the
+				   sticky header, play-head, top ad slot, hint, page padding, and
+				   footer. aspect-ratio then shrinks width to maintain 16:9. */
+				max-height: calc(100dvh - 380px);
+				margin: 0 auto;
+				border-radius: var(--radius);
+				overflow: hidden;
+				border: 1px solid var(--border);
+				background: #000;
+				box-shadow: var(--shadow);
+			}
+			.game-frame iframe {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+				display: block;
+			}
+
+			.hint {
+				margin-top: 0.75rem;
+				font-size: 0.9rem;
+			}
+
+			/* Sidebar appears alongside the game on wide screens */
+			@media (min-width: 1180px) {
+				.play-layout {
+					grid-template-columns: minmax(0, 1fr) 300px;
+					gap: 1.5rem;
+				}
+				.game-frame { margin: 0; }
+			}
+
+			@media (max-width: 1179px) {
+				.ad-side { display: none; }
+			}
+		</style>
+	</body>
+</html>

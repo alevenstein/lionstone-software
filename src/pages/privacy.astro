@@ -1,0 +1,161 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const pageTitle = `Privacy — ${SITE_TITLE}`;
+const pageDescription = `How ${SITE_TITLE} handles data, cookies, and third-party services.`;
+
+const lastUpdated = new Date('2026-05-07').toLocaleDateString('en-us', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<span class="eyebrow">Privacy</span>
+				<h1>Privacy policy</h1>
+				<p class="lede">
+					The short version: we don't run analytics, we don't sell data, and our games keep
+					your progress on your device. If we ever add features that change that, we'll tell
+					you here first.
+				</p>
+				<p class="updated">Last updated: {lastUpdated}</p>
+			</section>
+
+			<section class="prose">
+				<h2>Who we are</h2>
+				<p>
+					This site is operated by Lionstone Software, an independent game studio. You can
+					reach us at <a href="mailto:lionstonesoftware@gmail.com">lionstonesoftware@gmail.com</a>.
+				</p>
+
+				<h2>What we collect from you</h2>
+				<p>
+					Lionstone Software does not run analytics, tracking pixels, or fingerprinting on
+					this site. We do not maintain user accounts or mailing lists. We do not collect
+					personal information through this site directly.
+				</p>
+				<p>
+					Our hosting provider, <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>,
+					processes web requests on our behalf and may log standard request metadata
+					(IP address, user-agent, requested URL, timestamp) for the purpose of delivering
+					content, mitigating abuse, and protecting the service. That data is governed by
+					Cloudflare's own privacy policy.
+				</p>
+
+				<h2>Cookies and local storage</h2>
+				<p>
+					Lionstone Software does not set first-party cookies on this site. Our games may
+					use the browser's <em>local storage</em> on your device to save progress, settings,
+					or preferences. That data stays on your device — it is not transmitted to us.
+				</p>
+
+				<h2>Advertising</h2>
+				<p>
+					Some pages on this site may display advertisements served by third-party
+					advertising networks. When ads are present, those networks may set their own
+					cookies and collect data (such as your IP address, browser, and the pages you
+					view) in order to serve and measure ads. The data practices of those networks are
+					governed by their own privacy policies, which we will link from this page once an
+					ad network is in use. If you would prefer not to see personalized ads, you can
+					adjust your browser settings to block third-party cookies, or use the opt-out
+					tools provided by your local advertising self-regulation body.
+				</p>
+
+				<h2>Our games</h2>
+				<p>
+					Our games are designed to keep your data on your device. Lionstone Software does
+					not run servers that collect or store gameplay data.
+				</p>
+				<p>
+					<strong>Web games</strong> distributed through this site — including
+					<em>Defendor</em> and others listed on the <a href="/showcase">showcase</a> —
+					save progress and settings in your browser's local storage. That data stays on
+					your device.
+				</p>
+				<p>
+					<strong>Mobile games</strong> we publish for Android and other platforms —
+					including <em>Brick Basher</em> — store progress and settings in the app's
+					private storage on your device, and otherwise do not collect or transmit any
+					data to us. Some of these games may integrate third-party advertising SDKs
+					(for example, Google AdMob) to display ads. Those SDKs may collect their own
+					data — such as your device advertising ID, IP address, approximate location, and
+					ad-interaction events — in order to serve and measure ads. That data is governed
+					by the SDK provider's own privacy policy. Where required by law, the app will
+					surface an in-app consent prompt before personalized ads are shown.
+				</p>
+				<p>
+					If a particular game has data practices that differ from this policy (for
+					example, optional online leaderboards or cloud save), that game's page or in-app
+					settings will say so explicitly.
+				</p>
+
+				<h2>Your choices</h2>
+				<p>
+					Because we do not collect personal information about you through this site, there
+					is generally nothing for us to access, correct, or delete on request. You can
+					clear local storage at any time through your browser's site-data controls. If you
+					email us, you may ask us to delete the email correspondence we hold; we will do
+					so on request.
+				</p>
+
+				<h2>Children's privacy</h2>
+				<p>
+					This site is not directed to children under 13, and we do not knowingly collect
+					personal information from children. If you believe we have inadvertently received
+					such information, please contact us and we will delete it.
+				</p>
+
+				<h2>Changes to this policy</h2>
+				<p>
+					If we change this policy, we will update the &quot;Last updated&quot; date at the
+					top of this page and, for material changes, post a notice on the home page for at
+					least 30 days.
+				</p>
+
+				<h2>Contact</h2>
+				<p>
+					Questions about this policy? Email
+					<a href="mailto:lionstonesoftware@gmail.com">lionstonesoftware@gmail.com</a>.
+				</p>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			.intro {
+				padding: 3rem 0 1.5rem;
+				max-width: 820px;
+			}
+			.intro h1 { margin: 0 0 1rem; }
+			.lede {
+				font-size: 1.15rem;
+				color: var(--text-muted);
+				margin: 0 0 0.75rem;
+			}
+			.updated {
+				font-size: 0.85rem;
+				color: var(--text-dim);
+				margin: 0;
+			}
+			.prose {
+				max-width: var(--prose-width);
+				margin: 1rem 0 0;
+			}
+			.prose h2 {
+				margin-top: 2rem;
+				font-size: 1.4rem;
+			}
+		</style>
+	</body>
+</html>

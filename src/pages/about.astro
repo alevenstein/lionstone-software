@@ -1,62 +1,81 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const pageTitle = `About — ${SITE_TITLE}`;
+const pageDescription = `About ${SITE_TITLE}, an indie studio building small web and Android games and the occasional useful app.`;
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="intro">
+				<span class="eyebrow">About</span>
+				<h1>A small studio with a short list.</h1>
+				<p class="lede">
+					Lionstone Software is an independent studio. We build games for the web and
+					Android, plus a small selection of apps we wished existed. We are deliberately
+					small so we can ship things we are proud of.
+				</p>
+			</section>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+			<section class="prose">
+				<h2>What we build</h2>
+				<p>
+					Our games tend to be short, replayable, and respectful of your time — roguelikes
+					you can finish on a coffee break, puzzlers you can pick up between meetings.
+					Our apps are quiet utilities: focus tools, notebooks, the kind of software that
+					tries to disappear once it has done its job.
+				</p>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+				<h2>How we work</h2>
+				<p>
+					We prototype quickly, ship small, and iterate based on what real players tell us.
+					Most projects share a single TypeScript core that we wrap for web and Android.
+					When something needs native horsepower, we reach for Rust or Kotlin and keep the
+					rest of the stack the same.
+				</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+				<h2>What we won't do</h2>
+				<ul>
+					<li>No pay-to-win mechanics. Our games are bought once or are free with no upsell.</li>
+					<li>No streak shame. Our apps don't punish you for missing a day.</li>
+					<li>No tracking beyond what's needed to keep the lights on.</li>
+				</ul>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+				<h2>Get in touch</h2>
+				<p>
+					We're always happy to hear from players, fellow developers, and the curious.
+					Reach us at <a href="mailto:hello@lionstone.example">hello@lionstone.example</a>.
+				</p>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			.intro {
+				padding: 3rem 0 2rem;
+				max-width: 820px;
+			}
+			.intro h1 { margin: 0 0 1rem; }
+			.lede {
+				font-size: 1.15rem;
+				color: var(--text-muted);
+				margin: 0 0 1rem;
+			}
+			.prose {
+				max-width: var(--prose-width);
+				margin: 1rem 0 0;
+			}
+			.prose h2 { margin-top: 2rem; font-size: 1.5rem; }
+			.prose ul { padding-left: 1.25rem; }
+			.prose li { margin: 0.35rem 0; }
+		</style>
+	</body>
+</html>
