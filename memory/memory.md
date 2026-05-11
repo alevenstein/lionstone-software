@@ -63,6 +63,52 @@
 - Encountered a "Duplicate id 'defendor'" warning on first build — turned out to be stale `.astro` cache from a prior build. Cleared cache, rebuilt clean.
 - Reminder: when the dev server is running, `dist/` and `public/play/defendor/*` are file-locked on Windows. For destructive ops on those paths the user needs to stop dev first.
 
+### Turn 7 — 2026-05-07
+- Hotkeys not firing in iframed Defendor. Defendor's `input.js` listens on `window`; the iframe needed focus.
+- Added an inline script in the wrapper that calls `frame.contentWindow.focus()` on `load` and on `pointerdown` over the game frame. Same-origin so allowed.
+
+### Turn 8 — 2026-05-07
+- Sized the game wrapper to fit the viewport without scrolling.
+- First attempt removed the right-hand sidebar ad and bumped sizes; user reverted that change.
+- Final approach: set `.game-frame` `max-height: calc(100dvh - 380px)`, bumped `.play-page` max-width from 1120 → 1920px, tightened vertical padding on play-head/ad-top/hint. Aspect-ratio handles width when height is capped.
+- Also fixed an unrelated bug in same edit: `og:image` was `/play/defendor/index.htmlicon.svg` (caused by an earlier `replace_all`). Restored to `/play/defendor/icon.svg`.
+
+### Turn 9 — 2026-05-07
+- Added `/privacy` page (Astro page) with sections: Who we are, What we collect, Cookies and local storage, Advertising, Our games, Your choices, Children's privacy, Changes, Contact. Linked from Footer.
+- User manually edited the page after creation (changed contact email from `hello@lionstone.example` → `lionstonesoftware@gmail.com`).
+- Updated the "Our games" section to mention native mobile games (Brick Basher at `C:\Users\cleon\breakout`, Android Kotlin, package `com.lionstone.brickbasher`) — disclosed third-party ad SDKs (e.g. Google AdMob) for mobile games. Aligned bottom Contact email to match the user's update.
+
+### Turn 10 — 2026-05-07 → 2026-05-08
+- Cloudflare Pages deploy failed: "error occurred while updating repository submodules". Confirmed Defendor repo is private (anonymous WebFetch → 404). Cloudflare's GitHub integration has access to lionstone-software but not to the separate private alevenstein/defendor repo.
+- Decision: drop the submodule and vendor Defendor's playable files directly. Avoids needing a PAT; keeps Defendor private; private folders never leave the Defendor repo because we copy only what's needed.
+- Removed: submodule via `git submodule deinit -f` + `git rm -f`, deleted `.gitmodules`, cleaned `.git/modules/public/play/defendor`.
+- Vendored: `index.html`, `manifest.json`, `icon.svg`, `src/` from `C:\Users\cleon\work\defendor` into `public/play/defendor/`. Skipped `memory/`, `screenshots/`, `specs/`, `README.md`, `Cloudflare.md`.
+- Cleaned up `public/.assetsignore` — submodule-specific exclusion patterns are no longer needed.
+- User committed as `e923a81 "Removed submodule"` and pushed.
+- Created `scripts/sync-defendor.sh` for future updates and added `npm run sync-defendor`. Default source: `/c/Users/cleon/work/defendor`; override via `DEFENDOR_SRC` env var. Validates source files before any destructive ops; `rm -rf`s dest `src/` to avoid stale modules.
+- Note: lionstone-software is at `git@github.com:alevenstein/lionstone-software.git` (SSH origin). Deploys via Cloudflare Pages git integration.
+
+### Turn 11 — 2026-05-08
+- Noticed during commit prep: user has intentionally untracked `package-lock.json` (added to `.gitignore` AND deleted file). User accepts non-deterministic builds; do not restore unless asked.
+- User cancelled my plan to commit and redirected to a different task.
+
+### Turn 12 — 2026-05-08
+- Showcase card image fit changed from `object-fit: cover` → `contain` so off-aspect images (e.g. Defendor's square icon) display in full instead of being cropped to 16:9. No effect on actual 16:9 hero screenshots.
+
+### Turn 13 — 2026-05-08
+- Wired Google AdSense into `/games/defendor/`.
+  - Publisher ID: `ca-pub-7133034697479472`
+  - Top banner slot: `5762885187` (responsive, auto format, full-width-responsive)
+  - Right sidebar slot: `7932313563` (responsive, auto format, full-width-responsive)
+  - Loader script in `<head>` of `/games/defendor/` only (per user's preference; not site-wide).
+  - Inline `(adsbygoogle = window.adsbygoogle || []).push({});` per ad slot.
+- Refactored ad-slot CSS so the dashed "placeholder" border now lives on `.ad-placeholder` instead of `.ad-slot`. Live ads render border-free; unfilled slots (if any future ones lack IDs) still show the placeholder styling.
+- Updated `/privacy` to name Google AdSense specifically and link to: Google ads policy, Google privacy policy, Google Ad Settings, DAA opt-out, Your Online Choices.
+- User added a Brick Basher showcase entry separately (visible in build output as `/showcase/brickbasher/`).
+
+### Turn 14 — 2026-05-08
+- Quick reference: `npm run sync-defendor` runs `scripts/sync-defendor.sh`. Override source with `DEFENDOR_SRC=/path npm run sync-defendor`.
+
 ## Open Items / Context
 - Repo state at start: `M package-lock.json` (uncommitted modification).
 - Last commit: `eb87b28 source repo import`.
