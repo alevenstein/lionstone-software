@@ -109,6 +109,13 @@
 ### Turn 14 — 2026-05-08
 - Quick reference: `npm run sync-defendor` runs `scripts/sync-defendor.sh`. Override source with `DEFENDOR_SRC=/path npm run sync-defendor`.
 
+### Turn 15 — 2026-05-14
+- User reported two AdSense console errors on `/games/defendor/`:
+  1. `Uncaught (in promise) no-response :: [...adsbygoogle.js...]` from `sw.js`. Diagnosis: not our code — no `sw.js` exists in the project or git history. Workbox signature (`_handle`/`_getResponse`/`no-response`) points at a client-side service worker (browser extension ad-blocker or stale registered SW) intercepting the AdSense script. Suggested DevTools → Application → Service Workers to identify; incognito-with-extensions-off as a confirmation test.
+  2. (After incognito test) `TagError: adsbygoogle.push() error: No slot size for availableWidth=0`. Real bug. `.ad-slot { display: flex; ... }` made the `<ins class="adsbygoogle" style="display:block">` a flex item with no `flex`/`width`, so it shrank to content width = 0; AdSense's measurement returned 0 and threw.
+- Fix: added CSS rule `.ad-slot .adsbygoogle { width: 100%; }` in `src/pages/games/defendor.astro`. Keeps existing flex centering for any future placeholder children; forces the live AdSense `<ins>` to fill its parent's width.
+- Heads-up flagged (not changed): sidebar slot `7932313563` is 300px wide but uses `data-ad-format="auto"` + `data-full-width-responsive="true"`. Combo is designed for full-width banners; consider `data-ad-format="vertical"` (and dropping `full-width-responsive` on that slot) if fill rate or ad sizing looks off once live.
+
 ## Open Items / Context
 - Repo state at start: `M package-lock.json` (uncommitted modification).
 - Last commit: `eb87b28 source repo import`.

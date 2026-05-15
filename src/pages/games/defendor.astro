@@ -128,6 +128,12 @@ const pageDescription = 'Play Defendor, a top-down tower defense game by Lionsto
 				align-items: center;
 				justify-content: center;
 			}
+			/* AdSense <ins> is a flex item with no intrinsic width; without
+			   this it collapses to 0 and adsbygoogle.push() throws
+			   "No slot size for availableWidth=0". */
+			.ad-slot .adsbygoogle {
+				width: 100%;
+			}
 			/* Visible only when an unfilled slot still has a placeholder div
 			   inside (e.g. before its AdSense slot ID is wired). The live
 			   AdSense <ins> renders without this border. */
